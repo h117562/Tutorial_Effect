@@ -7,7 +7,6 @@
 #include "EventClass.h"
 
 #include "DebugInfo.h"
-#include "TestCanvas.h"
 
 class UIManager
 {
@@ -22,7 +21,6 @@ public:
 
 private:
 	DebugInfo m_debugUI;
-	TestCanvas m_canvas;
 };
 
 #endif

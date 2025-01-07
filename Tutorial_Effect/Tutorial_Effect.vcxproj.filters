@@ -40,6 +40,9 @@
     <Filter Include="UI\TextClass">
       <UniqueIdentifier>{2755e378-313d-44dc-bbe7-13e84f73d951}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Effect">
+      <UniqueIdentifier>{b08c85e2-e916-4fec-b4d1-7259b7edcd3b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h">
@@ -66,17 +69,11 @@
     <ClInclude Include="FrameTimer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>UI\Elements</Filter>
-    </ClInclude>
     <ClInclude Include="D3DClass.h">
       <Filter>DirectX</Filter>
     </ClInclude>
     <ClInclude Include="DebugInfo.h">
       <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Plane.h">
-      <Filter>UI\Elements</Filter>
     </ClInclude>
     <ClInclude Include="ShaderManager.h">
       <Filter>Shader</Filter>
@@ -87,23 +84,17 @@
     <ClInclude Include="RectTransform.h">
       <Filter>UI\Elements\Components</Filter>
     </ClInclude>
-    <ClInclude Include="TestCanvas.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UIShaderClass.h">
-      <Filter>Shader\ShaderClass</Filter>
-    </ClInclude>
     <ClInclude Include="UIManager.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="TextClass.h">
-      <Filter>UI\TextClass</Filter>
-    </ClInclude>
-    <ClInclude Include="TextBox.h">
-      <Filter>UI\Elements</Filter>
-    </ClInclude>
     <ClInclude Include="TextureResource.h">
       <Filter>Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectShaderClass.h">
+      <Filter>Shader\ShaderClass</Filter>
+    </ClInclude>
+    <ClInclude Include="TextClass.h">
+      <Filter>UI\TextClass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -137,17 +128,25 @@
     <ClCompile Include="SystemClass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="TestCanvas.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UIShaderClass.cpp">
-      <Filter>Shader\ShaderClass</Filter>
-    </ClCompile>
     <ClCompile Include="UIManager.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectShaderClass.cpp">
+      <Filter>Shader\ShaderClass</Filter>
+    </ClCompile>
+    <ClCompile Include="TestEffect.h">
+      <Filter>Effect</Filter>
     </ClCompile>
     <ClCompile Include="TextClass.cpp">
       <Filter>UI\TextClass</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\EffectVs.hlsl">
+      <Filter>Shader\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="..\EffectPS.hlsl">
+      <Filter>Shader\HLSL</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

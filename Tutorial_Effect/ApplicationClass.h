@@ -9,6 +9,7 @@
 #include "UIManager.h"
 #include "TextClass.h"
 #include "EventClass.h"
+#include "TestEffect.h"
 
 class ApplicationClass
 {
@@ -31,5 +32,8 @@ private:
 	ShaderManager* m_ShaderManager;
 	CameraClass* m_CameraClass;
 	UIManager* m_uiManager;
+	TestEffect* m_tEffect;
+
+	float m_testNum;
 };
 #endif

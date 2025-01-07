@@ -10,7 +10,6 @@ enum struct UI_EVENT
 {
 	DEFAULT,
 	TOGGLE_DEBUG_MODE,
-	TOGGLE_TEST_CANVAS,
 	EVENT_COUNT,//이벤트 개수 //[]배열 크기 할당하기 위함
 };
 

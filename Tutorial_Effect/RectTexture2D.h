@@ -154,6 +154,24 @@ protected://상속 받은 클래스에서만 사용가능하게
 		pDeviceContext->DrawIndexed(m_indexCount, 0, 0);//그리기
 	}
 
+	void TestDraw(ID3D11DeviceContext* pDeviceContext)
+	{
+		ID3D11ShaderResourceView* srv0 = nullptr;
+		ID3D11ShaderResourceView* srv1 = nullptr;
+		ID3D11ShaderResourceView* srv2 = nullptr;
+
+		srv0 = m_textures[0].GetResourceView();
+		srv1 = m_textures[1].GetResourceView();
+		srv2 = m_textures[2].GetResourceView();
+
+		pDeviceContext->IASetVertexBuffers(0, 1, &m_vertexBuffer, &m_stride, &m_offset);//버퍼를 인풋 어셈블러에 바인딩
+		pDeviceContext->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R32_UINT, 0);//버퍼를 인풋 어셈블러에 바인딩
+		pDeviceContext->PSSetShaderResources(0, 1, &srv0);//쉐이더 리소스 뷰를 픽셀 쉐이더에 연계
+		pDeviceContext->PSSetShaderResources(1, 1, &srv1);//쉐이더 리소스 뷰를 픽셀 쉐이더에 연계
+		pDeviceContext->PSSetShaderResources(2, 1, &srv2);//쉐이더 리소스 뷰를 픽셀 쉐이더에 연계
+		pDeviceContext->DrawIndexed(m_indexCount, 0, 0);//그리기
+	}
+
 	bool RayCast(
 		const DirectX::XMMATRIX& world,
 		const DirectX::XMMATRIX& view,

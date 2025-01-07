@@ -7,6 +7,7 @@ ApplicationClass::ApplicationClass()
 	m_uiManager = 0;
 	m_TextClass = 0;
 	m_ShaderManager = 0;
+	m_testNum = 0.1f;
 }
 
 ApplicationClass::~ApplicationClass()
@@ -82,7 +83,10 @@ bool ApplicationClass::Initialize(HWND hwnd)
 	{
 		return false;
 	}
-	
+
+	m_tEffect = new TestEffect;
+	m_tEffect->Initialize(m_Direct3D->GetDevice());
+
 	//블랜드 활성화
 	m_Direct3D->EnableAlphaBlending();
 
@@ -94,6 +98,11 @@ bool ApplicationClass::Initialize(HWND hwnd)
 
 void ApplicationClass::Shutdown()
 {
+	if (m_tEffect)
+	{
+		delete m_tEffect;
+		m_tEffect = 0;
+	}
 
 	if (m_uiManager)
 	{
@@ -143,7 +152,7 @@ bool ApplicationClass::Frame(HWND hwnd, FrameTimer* pFrameTimer)
 	m_CameraClass->Render();
 
 	//3D RenderTarget 초기화(특정 컬러로)
-	m_Direct3D->BeginScene(0.0f, 0.0f, 0.2f, 1.0f);
+	m_Direct3D->BeginScene(0.0f, 0.1f, 0.2f, 1.0f);
 
 	//2D RenderTarget 초기화
 	m_TextClass->BeginDraw();
@@ -189,17 +198,33 @@ void ApplicationClass::HandleInput(FrameTimer* pFrameTimer)
 		EventClass::GetInstance().Publish(UI_EVENT::TOGGLE_DEBUG_MODE);
 	}
 
-	state = InputClass::GetInstance().GetKeyPressedAndRelease(DIK_F6);
-	if (state)
-	{
-		EventClass::GetInstance().Publish(UI_EVENT::TOGGLE_TEST_CANVAS);
-	}
-
 	return;
 }
 
 
 void ApplicationClass::Render(HWND hwnd)
 {
+	XMMATRIX worldMatrix, viewMatrix, projectionMatrix;
+	XMFLOAT3 speeds, scales;
+	static float frameTime = 0.0f;
+
+	frameTime += 0.04f;
+	if (frameTime > 1000.0f)
+	{
+		frameTime = 0.0f;
+	}
+
+	speeds = XMFLOAT3(0.0f, 2.0f, 0.0f);
+	scales = XMFLOAT3(1.0f, 1.0f, 1.0f);
+
+	worldMatrix = XMMatrixScaling(4.0f, 4.0f, 4.0f);
+	m_CameraClass->GetViewMatrix(viewMatrix);
+	m_Direct3D->GetProjectionMatrix(projectionMatrix);
+
+	m_ShaderManager->GetEffectShader()->Render(m_Direct3D->GetDeviceContext(),
+		worldMatrix, viewMatrix, projectionMatrix, frameTime, speeds, scales);
+
+	m_tEffect->Render(m_Direct3D->GetDeviceContext());
+
 	return;
 }

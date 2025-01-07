@@ -2,7 +2,7 @@
 
 ShaderManager::ShaderManager()
 {
-	m_uiShader = 0;
+	m_effectShader = 0;
 }
 
 
@@ -18,16 +18,16 @@ bool ShaderManager::Initialize(ID3D11Device* pDevice, HWND hwnd)
 {
 	bool result;
 
-	m_uiShader = new UIShaderClass;
-	if (!m_uiShader)
+	m_effectShader = new EffectShaderClass;
+	if (!m_effectShader)
 	{
 		return false;
 	}
 
-	result = m_uiShader->Initialize(pDevice, hwnd);
+	result = m_effectShader->Initialize(pDevice, hwnd);
 	if (!result)
 	{
-		MessageBox(hwnd, L"Could not initialize the TextureShader.", L"Error", MB_OK);
+		MessageBox(hwnd, L"Could not initialize the EffectShader.", L"Error", MB_OK);
 		return false;
 	}
 
@@ -36,18 +36,17 @@ bool ShaderManager::Initialize(ID3D11Device* pDevice, HWND hwnd)
 
 void ShaderManager::Shutdown()
 {
-
-	if (m_uiShader)
+	if (m_effectShader)
 	{
-		m_uiShader->Shutdown();
-		delete m_uiShader;
-		m_uiShader = 0;
+		m_effectShader->Shutdown();
+		delete m_effectShader;
+		m_effectShader = 0;
 	}
 
 	return;
 }
 
-UIShaderClass* ShaderManager::GetUIShader()
+EffectShaderClass* ShaderManager::GetEffectShader()
 {
-	return m_uiShader;
+	return m_effectShader;
 }

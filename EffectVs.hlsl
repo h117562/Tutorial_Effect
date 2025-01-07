@@ -8,23 +8,23 @@ cbuffer MatrixBuffer : register(b0)
 struct Vin
 {
     float4 pos : POSITION;
-    float2 texcoord : TEXCOORD;
+    float2 tex : TEXCOORD;
 };
 
 struct VOut
 {
     float4 pos : SV_POSITION;
-    float2 texcoord : TEXCOORD;
+    float2 tex : TEXCOORD;
 };
 
 VOut main(Vin input)
-{
+{ 
 	VOut output;
 
 	output.pos = mul(input.pos, World);
 	output.pos = mul(output.pos, View);
 	output.pos = mul(output.pos, Projection);
-	output.texcoord = input.texcoord;
+	output.tex = input.tex;
 
 	return output;
 }

@@ -63,7 +63,7 @@ public:
 			0,
 			DirectX::CREATETEX_DEFAULT,
 			&resource);
-
+		
 		if (FAILED(result))
 		{
 			return result;

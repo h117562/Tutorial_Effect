@@ -1,7 +1,7 @@
 #ifndef _SHADER_MANAGER_H_
 #define _SHADER_MANAGER_H_
 
-#include "UIShaderClass.h"
+#include "EffectShaderClass.h"
 
 class ShaderManager
 {
@@ -12,10 +12,11 @@ public:
 
 	bool Initialize(ID3D11Device*, HWND);
 	void Shutdown();
-	UIShaderClass* GetUIShader();
+
+	EffectShaderClass* GetEffectShader();
 
 private:
-	UIShaderClass* m_uiShader;
+	EffectShaderClass* m_effectShader;
 
 };
 
