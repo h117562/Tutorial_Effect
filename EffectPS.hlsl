@@ -40,8 +40,8 @@ float4 main(PixelInputType input) : SV_TARGET
     //finalNoise = saturate(finalNoise);
 
     finalColor = fireTexture.Sample(SampleTypeWrap, finalNoise);
-
-    finalColor.a = finalNoise + input.tex.y - 0.3f;
-
+    
+    finalColor.a = finalNoise + input.tex.y - 0.5f;
+ 
     return finalColor;
 }
