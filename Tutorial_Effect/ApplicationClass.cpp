@@ -205,7 +205,7 @@ void ApplicationClass::HandleInput(FrameTimer* pFrameTimer)
 void ApplicationClass::Render(HWND hwnd)
 {
 	XMMATRIX worldMatrix, viewMatrix, projectionMatrix;
-	XMFLOAT3 speeds, scales;
+
 	static float frameTime = 0.0f;
 
 	frameTime += 0.04f;
@@ -214,15 +214,13 @@ void ApplicationClass::Render(HWND hwnd)
 		frameTime = 0.0f;
 	}
 
-	speeds = XMFLOAT3(0.0f, 2.0f, 0.0f);
-	scales = XMFLOAT3(1.0f, 1.0f, 1.0f);
-
 	worldMatrix = XMMatrixScaling(4.0f, 4.0f, 4.0f);
+
 	m_CameraClass->GetViewMatrix(viewMatrix);
 	m_Direct3D->GetProjectionMatrix(projectionMatrix);
 
 	m_ShaderManager->GetEffectShader()->Render(m_Direct3D->GetDeviceContext(),
-		worldMatrix, viewMatrix, projectionMatrix, frameTime, speeds, scales);
+		worldMatrix, viewMatrix, projectionMatrix, frameTime);
 
 	m_tEffect->Render(m_Direct3D->GetDeviceContext());
 

@@ -20,10 +20,8 @@ private:
 
     struct NoiseBufferType
     {
+        XMFLOAT3 padding;
         float frameTime;
-        XMFLOAT3 speeds;
-        XMFLOAT3 scales;
-        float dummy;
     };
 
 public:
@@ -34,12 +32,12 @@ public:
     bool Initialize(ID3D11Device*, HWND);
     void Shutdown();
     bool Render(ID3D11DeviceContext*, const XMMATRIX&, const XMMATRIX&, const XMMATRIX&, 
-        float, XMFLOAT3, XMFLOAT3);
+        float);
 
 private:
     void OutputShaderErrorMessage(ID3DBlob*, HWND);
     bool UpdateShaderBuffers(ID3D11DeviceContext*, XMMATRIX, XMMATRIX, XMMATRIX,
-        float, XMFLOAT3, XMFLOAT3);
+        float);
 
 private:
 	ID3D11VertexShader* m_vertexShader;

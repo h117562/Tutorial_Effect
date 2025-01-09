@@ -184,13 +184,13 @@ bool EffectShaderClass::Initialize(ID3D11Device* pDevice, HWND hwnd)
 }
 
 bool EffectShaderClass::Render(ID3D11DeviceContext* pDeviceContext, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, const XMMATRIX& projectionMatrix, 
-	float frameTime, XMFLOAT3 scrollSpeeds, XMFLOAT3 scales)
+	float frameTime)
 {
 	bool result;
 
 	//버퍼 업데이트
 	result = UpdateShaderBuffers(pDeviceContext, worldMatrix, viewMatrix, projectionMatrix,
-		frameTime, scrollSpeeds, scales);
+		frameTime);
 	if (!result)
 	{
 		return false;
@@ -265,7 +265,7 @@ void EffectShaderClass::OutputShaderErrorMessage(ID3DBlob* errorMessage, HWND hw
 //쉐이더에서 사용하는 버퍼를 업데이트
 bool EffectShaderClass::UpdateShaderBuffers(ID3D11DeviceContext* pDeviceContext,
 	XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix,
-	float frameTime, XMFLOAT3 speeds, XMFLOAT3 scales)
+	float frameTime)
 {
 	HRESULT result;
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -316,9 +316,8 @@ bool EffectShaderClass::UpdateShaderBuffers(ID3D11DeviceContext* pDeviceContext,
 	dataPtr1 = (NoiseBufferType*)mappedResource.pData;
 
 	//매개변수로 가져온 데이터로 업데이트
+	dataPtr1->padding = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	dataPtr1->frameTime = frameTime;
-	dataPtr1->speeds = speeds;
-	dataPtr1->scales = scales;
 
 	//상수 버퍼를 잠금 해제 (GPU 액세스 다시 활성화)
 	pDeviceContext->Unmap(m_noiseBuffer, NULL);
